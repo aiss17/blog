@@ -33,8 +33,13 @@ $router->post('artikel/addArtikel', 'ArtikelController@create');
 $router->put('artikel/{id}', 'ArtikelController@update');
 $router->delete('artikel/{id}', 'ArtikelController@delete');
 
-// LapIjin Controller
-
+// Ijin Controller
+$router->get('ijin/getAll', 'IjinController@getAll');
 $router->get('ijin/getByKodeDivisi/{kodedivisi}', 'IjinController@getByKodeDivisi');
 $router->get('ijin/getByNup/{nup}', 'IjinController@getByNup');
 
+// Faq Controller
+$router->get('faq/get', 'FaqController@get');
+
+// Trx Controller
+$router->get('trx/getByNup/{nup}', 'TrxController@getByNup');

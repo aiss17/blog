@@ -23,20 +23,66 @@ class IjinController extends Controller {
     }
 
     public function getByKodeDivisi($kodedivisi) {
-        $data = Ijin::where('kodedivisi', '=', $kodedivisi)->orderBy('id')->get();
+        $datas = Ijin::where('kodedivisi', '=', $kodedivisi)->orderBy('id')->get();
+
+        $count = count($datas);
+        for ($i=0; $i < $count; $i++) { 
+            $data[] = array();
+            
+            if ($datas[$i]['ijin'] == '1') {
+                $izin = 'Sakit';
+            } elseif ($datas[$i]['ijin'] == '2') {
+                $izin = 'Keperluan';
+            } else {
+                $izin = 'Datang Telat';
+            }
+
+            $date = date_create($datas[$i]['created_at']);
+            $tgl=date_format($date, 'd-m-Y');
+            $jam=date_format($date, 'H:i:s');
+            $data[$i]['id'] = $datas[$i]['id'];
+            $data[$i]['nup'] = $datas[$i]['nup'];
+            $data[$i]['izin'] = $datas[$i]['ijin'];
+            $data[$i]['ketizin'] = $izin;
+            $data[$i]['keterangan'] = $datas[$i]['keterangan'];
+            $data[$i]['approved'] = $datas[$i]['approved'];
+            $data[$i]['nup_approved'] = $datas[$i]['nup_approved'];
+            $data[$i]['tgl_approved'] = $datas[$i]['tgl_approved'];
+            $data[$i]['tgl'] = $tgl;
+            $data[$i]['jam'] = $jam;
+        }
 
         return response()->json(['data' => $data, 'message' => "Berhasil mengambil data!"], 200);
     }
 
     public function getByNup($nup) {
-        $data = Ijin::where('nup', '=', $nup)->orderBy('id')->get();
+        $datas = Ijin::where('nup', '=', $nup)->orderBy('id')->get();
 
-        if ($data[0]['ijin'] == '1') {
-            $data[0]['ijin'] = 'Sakit';
-        } elseif ($data[0]['ijin'] == '2') {
-            $data[0]['ijin'] = 'Keperluan';
-        } else {
-            $data[0]['ijin'] = 'Datang Telat';
+        $count = count($datas);
+        for ($i=0; $i < $count; $i++) { 
+            $data[] = array();
+            
+            if ($datas[$i]['ijin'] == '1') {
+                $izin = 'Sakit';
+            } elseif ($datas[$i]['ijin'] == '2') {
+                $izin = 'Keperluan';
+            } else {
+                $izin = 'Datang Telat';
+            }
+
+            $date = date_create($datas[$i]['created_at']);
+            $tgl=date_format($date, 'd-m-Y');
+            $jam=date_format($date, 'H:i:s');
+            $data[$i]['id'] = $datas[$i]['id'];
+            $data[$i]['nup'] = $datas[$i]['nup'];
+            $data[$i]['izin'] = $datas[$i]['ijin'];
+            $data[$i]['ketizin'] = $izin;
+            $data[$i]['keterangan'] = $datas[$i]['keterangan'];
+            $data[$i]['approved'] = $datas[$i]['approved'];
+            $data[$i]['nup_approved'] = $datas[$i]['nup_approved'];
+            $data[$i]['tgl_approved'] = $datas[$i]['tgl_approved'];
+            $data[$i]['tgl'] = $tgl;
+            $data[$i]['jam'] = $jam;
         }
 
         return response()->json(['data' => $data, 'message' => "Berhasil mengambil data!"], 200);
