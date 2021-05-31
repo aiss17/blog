@@ -43,3 +43,10 @@ $router->get('faq/get', 'FaqController@get');
 
 // Trx Controller
 $router->get('trx/getByNup/{nup}', 'TrxController@getByNup');
+
+// Data Project Controller
+$router->get('project/getProject', 'DataProjectController@getProject');
+$router->get('project/getProjectApp/{id_sbu_cabang}/{status}', 'DataProjectController@getProjectApp');
+$router->get('project/getProjectCabang/{id_sbu_cabang}', 'DataProjectController@getProjectCabang');
+$router->get('project/getProjectDroping/{so_number}', 'DataProjectController@getProjectDroping');
+$router->get('project/getProjectByID/{id}', 'DataProjectController@getProjectByID');
